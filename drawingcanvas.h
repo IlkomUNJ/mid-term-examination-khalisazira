@@ -10,6 +10,8 @@
 #include <iomanip>
 #include <QPixmap>
 #include "CustomMatrix.h"
+#include <array>
+#include <vector>
 
 using namespace std;
 using Array3x3 = std::array<std::array<bool, 3>, 3>;
@@ -22,6 +24,9 @@ private:
     const int WINDOW_WIDTH=600;
     const int WINDOW_HEIGHT=400;
 
+    string isSegmentPattern(const CustomMatrix& matrix);
+    vector<pair<string, std::array<std::array<bool, 3>, 3>>> m_segmentPatterns;
+
 public:
     explicit DrawingCanvas(QWidget *parent = nullptr);
 
@@ -29,9 +34,10 @@ public:
     void clearPoints();
     void paintLines();
     void segmentDetection();
+    bool getIsPaintLinesClicked() const {return isPaintLinesClicked; }
 
 protected:
-    // Overridden method to handle painting on the widget
+
     void paintEvent(QPaintEvent *event) override;
 
     // Overridden method to handle mouse clicks
@@ -40,6 +46,7 @@ protected:
 private:
     // A vector to store all the points drawn by the user
     QVector<QPoint> m_points;
+    QVector<pair<QPoint, string>> m_detectedSegments;
 
     bool isPaintLinesClicked = false;
 };

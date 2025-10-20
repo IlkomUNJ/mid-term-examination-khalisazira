@@ -9,7 +9,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
     QHBoxLayout *subLayout = new QHBoxLayout();
 
     // Create and add the drawing canvas to the top of the layout
-    DrawingCanvas *m_canvas = new DrawingCanvas(this);
+    m_canvas = new DrawingCanvas(this);
     mainLayout->addWidget(m_canvas);
 
     // Create a button and a layout for the bottom of the window
